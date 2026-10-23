@@ -1,0 +1,44 @@
+KaPlan mit Projektsteuerung – Start in einem neuen Repository
+
+Enthalten: vollständiger Quellcode, Planlaufmanagement, Baubetriebsplanung,
+Projektsteuerung, Logos, Tests, Dokumentation und fertiger Build unter app/.
+
+1. ZIP entpacken. Den INHALT des Ordners KaPlan in das neue Repository laden.
+   package.json, index.html, src, public, app und .github müssen direkt in der
+   Repository-Wurzel stehen. Nicht nur das ZIP hochladen.
+   GitHub Desktop oder git übertragen auch den Ordner .github vollständig.
+2. Den Branch main verwenden.
+3. Settings > Pages > Build and deployment > Source: GitHub Actions auswählen.
+4. Actions > Pages > Run workflow > main starten.
+   Der Workflow prüft, baut und veröffentlicht die Anwendung. Nach weiteren
+   Änderungen auf main läuft dies automatisch.
+5. Den Link unter Settings > Pages öffnen. Der Name des Repositories ist frei.
+
+Alternative ohne lokalen Build:
+Den Workflow Pages deaktivieren. Settings > Pages > Source: Deploy from a branch,
+Branch main, / (root), Save wählen. Die Startseite führt zum enthaltenen app/-Build.
+Bei späteren Codeänderungen lokal npm ci und npm run build:upload ausführen und
+auch app/ erneuern. Nur einen der beiden Veröffentlichungswege aktiv verwenden.
+
+Lokal entwickeln (Node.js 22 oder neuer):
+  npm ci
+  npm run dev
+Prüfen: npm test und npm run build
+Fertigen Stand für einen kompletten Upload erneuern: npm run build:upload
+
+Projektsteuerung verwenden:
+Neues Projekt anlegen. Die Checkbox übernimmt die neutrale Checklistenstruktur.
+Die Kontakte aus der gelieferten Exceldatei über Projektbeteiligtenliste >
+Excel-Import laden. Eine ausgefüllte Checkliste über Checkliste importieren laden.
+Fristanzeigen werden dabei auf die Seite Fristen verteilt. Unter Protokolle kann
+eine neue Reihe erstellt oder eine vorhandene .protokoll-/JSON-Datei geöffnet werden.
+
+Die ursprünglichen privaten Exceldateien sind nicht im veröffentlichbaren Ordner.
+Sie können direkt in der Anwendung importiert werden. Die Standardfristen stammen
+aus der gelieferten Checkliste; Erforderlichkeit und Bezugstermine pro Projekt prüfen.
+
+Daten bleiben lokal im jeweiligen Browser. Sicherungen in jedem Bereich separat
+exportieren und bei einem Umzug wieder einspielen. Eine gemeinsame Datenbank oder
+Benutzeranmeldung ist wie im bisherigen Stand nicht enthalten.
+
+Details: README.md. Prüfstand: docs/PRUEFUNG.md.
