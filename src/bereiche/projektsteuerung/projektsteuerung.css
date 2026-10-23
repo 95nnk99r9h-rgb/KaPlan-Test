@@ -1,0 +1,271 @@
+/* Ergänzungen auf den gemeinsamen KaPlan-Bausteinen. Keine eigenen Farbwerte für die Oberfläche. */
+.ps-brand {
+  width: 100%;
+  text-align: center;
+}
+.ps-brand span {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--accent);
+  margin-top: -2px;
+}
+.ps-app .row.wrap {
+  gap: 8px;
+}
+.ps-app .content-inner,
+.ps-app .stack,
+.ps-app .card {
+  min-width: 0;
+}
+.ps-app .select {
+  max-width: 100%;
+}
+.ps-app .row > .select {
+  width: auto;
+  max-width: 240px;
+}
+.ps-app .field > span:first-child {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+.ps-projekt-tabs {
+  position: relative;
+}
+.ps-gewerke {
+  flex-wrap: wrap;
+}
+.ps-gewerke button {
+  font-size: 12px;
+  padding: 8px 10px;
+}
+.ps-link {
+  border: 0;
+  background: none;
+  padding: 0;
+  text-align: left;
+  color: var(--accent);
+  font: inherit;
+  cursor: pointer;
+}
+.ps-link:hover {
+  text-decoration: underline;
+}
+.ps-table {
+  table-layout: auto;
+}
+.ps-table td {
+  overflow-wrap: anywhere;
+  max-width: 340px;
+}
+.ps-table .actions {
+  white-space: normal;
+  min-width: 100px;
+}
+.ps-table .actions .btn {
+  margin: 3px;
+}
+.ps-table .actions .btn-icon {
+  display: inline-flex;
+}
+.ps-table .select {
+  font-size: 12px;
+  padding: 6px 8px;
+  min-width: 110px;
+}
+.ps-entfaellt {
+  opacity: 0.66;
+}
+.ps-pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.ps-datei {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.ps-datei input[type='file'] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  width: 100%;
+  cursor: pointer;
+}
+.ps-import-vorschau {
+  max-height: 48vh;
+  overflow: auto;
+}
+.ps-bezug {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1.5fr;
+  gap: 14px;
+  align-items: center;
+  border-top: 1px solid var(--separator);
+  padding-top: 12px;
+}
+.ps-teilnehmer {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 0.5fr 1fr auto;
+  gap: 10px;
+  align-items: end;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--separator);
+}
+.ps-teilnehmer:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.ps-teilnehmer .field {
+  min-width: 0;
+}
+.ps-top-head {
+  gap: 12px;
+  flex-wrap: nowrap;
+}
+.ps-top-head strong {
+  white-space: nowrap;
+}
+.ps-top-head > .input {
+  flex: 1;
+  min-width: 0;
+}
+.ps-eintrag {
+  padding: 18px 22px;
+  border-top: 1px solid var(--separator);
+  border-left: 3px solid var(--accent);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.ps-eintrag.ps-typ-F {
+  border-left-color: var(--purple);
+}
+.ps-eintrag.ps-typ-A {
+  border-left-color: var(--orange);
+}
+.ps-eintrag .segmented button {
+  font-size: 12px;
+}
+.ps-ursprung {
+  background: var(--bg-subtle);
+  border: 1px solid var(--separator);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+.ps-ursprung .btn {
+  font-size: 11px;
+}
+.ps-druckvorschau {
+  display: block;
+  border: 1px solid var(--separator);
+  background: white;
+  border-radius: var(--radius);
+  width: 100%;
+  height: 1000px;
+  max-width: 900px;
+  margin: auto;
+}
+.ps-logo-preview {
+  max-width: 230px;
+  max-height: 65px;
+  object-fit: contain;
+}
+@media (min-width: 721px) and (max-width: 1050px) {
+  .start-kacheln {
+    gap: 16px;
+    padding-inline: 18px;
+  }
+  .bereich-kachel-titel {
+    font-size: 21px;
+  }
+}
+@media (max-width: 1200px) {
+  .ps-teilnehmer {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .ps-teilnehmer > button {
+    justify-self: end;
+  }
+  .ps-table td {
+    padding: 9px 10px;
+  }
+}
+@media (max-width: 720px) {
+  .ps-bezug {
+    grid-template-columns: 1fr 1fr;
+  }
+  .ps-bezug > strong {
+    grid-column: 1/-1;
+  }
+  .ps-teilnehmer {
+    grid-template-columns: 1fr 1fr;
+  }
+  .ps-app .row > .select {
+    width: 100%;
+    max-width: none;
+  }
+  .ps-top-head {
+    flex-wrap: wrap;
+  }
+  .ps-top-head > .input {
+    min-width: 65%;
+  }
+}
+@media (max-width: 640px) {
+  .ps-app .ps-gewerke,
+  .ps-app .ps-projekt-tabs {
+    flex-wrap: wrap;
+    overflow: visible;
+  }
+  .ps-gewerke button {
+    font-size: 11px;
+    padding: 6px 8px;
+  }
+  .ps-projekt-tabs button {
+    padding: 8px 9px;
+    font-size: 12px;
+  }
+  .ps-table td {
+    max-width: none;
+  }
+  .ps-table td:first-child {
+    margin-bottom: 6px;
+  }
+  .ps-table .actions {
+    min-width: 0;
+  }
+  .ps-eintrag {
+    padding: 14px 16px;
+  }
+  .ps-eintrag .segmented {
+    width: auto;
+    max-width: 100%;
+    flex-wrap: wrap;
+  }
+  .ps-eintrag .segmented button {
+    font-size: 11px;
+    padding: 5px 7px;
+  }
+  .ps-teilnehmer {
+    gap: 8px;
+  }
+  .ps-druckvorschau {
+    height: 850px;
+  }
+}
+
+@media (max-width: 640px) {
+  .ps-app .ps-ansichten {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: visible;
+    width: 100%;
+  }
+}
