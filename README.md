@@ -752,6 +752,11 @@ zurückhaltende Flächen auf `#f5f5f7`, weiße Karten mit weichen Radien und fei
 Hausfarbe von Mailänder Consult `#24456e` als Akzent (auch für alle Fortschrittsbalken),
 transluzente Seitenleiste und Kopfzeile, Segmented Controls und Pill-Buttons. Die Oberfläche ist bis auf Telefonbreite (~400 px) nutzbar.
 
+Für wen KaPlan gedacht ist, was es leisten soll und welche Festlegungen dabei dauerhaft gelten,
+hält [`PRODUCT.md`](PRODUCT.md) fest – als Grundlage für Gestaltungsarbeit. Die Überschriften
+dort sind englisch, weil sie dem Schema der Gestaltungshilfe Impeccable folgen
+(`/impeccable init`); die Hilfe selbst ist im Repository nicht installiert.
+
 ## Nächste Schritte (Ausblick)
 
 * Ablösung von `storage.ts` durch eine Datenbank (z.B. PostgreSQL) samt API – das Datenmodell in
