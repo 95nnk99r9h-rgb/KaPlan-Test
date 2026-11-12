@@ -754,8 +754,22 @@ transluzente Seitenleiste und Kopfzeile, Segmented Controls und Pill-Buttons. Di
 
 Für wen KaPlan gedacht ist, was es leisten soll und welche Festlegungen dabei dauerhaft gelten,
 hält [`PRODUCT.md`](PRODUCT.md) fest – als Grundlage für Gestaltungsarbeit. Die Überschriften
-dort sind englisch, weil sie dem Schema der Gestaltungshilfe Impeccable folgen
-(`/impeccable init`); die Hilfe selbst ist im Repository nicht installiert.
+dort sind englisch, weil sie dem Schema der Gestaltungshilfe Impeccable folgen.
+
+Impeccable (Version 4.8.2, Apache-2.0) liegt als Projekt-Skill unter `.claude/skills/impeccable/`
+und stellt in Claude Code den Befehl `/impeccable` bereit, etwa `/impeccable critique …` oder
+`/impeccable audit …`. Der Ordner ist unverändert aus dem öffentlichen Repository
+`pbakaus/impeccable` übernommen (Tag `skill-v4.8.2`), dazu `LICENSE` und `NOTICE.md` von dort. Er
+ist fremder Code in englischer Sprache: Er wird nicht von Hand bearbeitet, sondern nur als Ganzes
+ersetzt, und die Regeln dieses Repositories zu Sprache und Kommentaren gelten für ihn nicht. Der
+Design-Hook und die Subagenten, die der Impeccable-Installer zusätzlich einrichtet, sind nicht
+enthalten.
+
+Für Kontextabruf, automatische Prüfregeln und den Live-Modus startet die Skill ein eigenes
+Programm. Der Starter `.claude/skills/impeccable/scripts/impeccable` lädt es beim ersten Aufruf
+von GitHub nach `~/.impeccable/` und prüft es gegen
+`.claude/skills/impeccable/scripts/engine-checksums.txt`. Wo dieses Programm nicht starten darf,
+liest die Skill `PRODUCT.md` direkt und arbeitet ohne es weiter.
 
 ## Nächste Schritte (Ausblick)
 
