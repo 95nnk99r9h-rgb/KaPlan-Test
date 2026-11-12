@@ -32,8 +32,7 @@ Baubetriebsplanung und Projektsteuerung –, als drei Bereiche, die unabhängig 
 Es übernimmt, was zuvor in Excel-Listen (Planliste, Beteiligtenliste, Checkliste) und im
 Protokollwerkzeug `MCProtokoll.html` lag.
 
-Drei Dinge soll KaPlan leisten (bestätigt am 12.11.2026; eine Rangfolge untereinander ist nicht
-festgelegt):
+Drei Dinge soll KaPlan leisten (bestätigt am 12.11.2026):
 
 1. **Keine Frist geht verloren.** KaPlan kennt die tatsächlichen Abläufe – VVBau-Prozessketten,
    Richtlinienfristen je Fahrplanjahr, Checklisten –, rechnet Soll-Termine selbst und zeigt, was
@@ -42,6 +41,10 @@ festgelegt):
    Protokolle sind belastbar dokumentiert und lassen sich für Auftraggeber und Prüfungen ausgeben.
 3. **Einheitliche Arbeitsweise.** Alle Projekte werden nach denselben Workflows, Vorlagen und
    Begriffen geführt.
+
+Vorrang hat der erste Zweck (bestätigt am 12.11.2026): Kann in der Oberfläche nicht alles
+gleichzeitig vorn stehen, steht vorn, was fällig oder überfällig ist und wer am Zug ist; Nachweis
+und Einheitlichkeit ordnen sich unter.
 
 Erfolg heißt: Kein fälliger Schritt, keine Terminfrist und keine offene Aufgabe verstreicht
 unbemerkt; jeder Stand lässt sich später belegen; Projekte werden gleich geführt, unabhängig davon,
@@ -119,22 +122,22 @@ sind.
 
 * **Marke.** KaPlan-Logos sowie Wortmarke und Hausfarbe von Mailänder Consult sind heutiger Stand,
   aber nicht als dauerhaft bindend bestätigt.
-* **Rangfolge der drei Zwecke** untereinander.
 * **Zuschnitt der Datenbank.** Zeitpunkt, Rechte je Rolle, automatischer Mailversand und
   Dateiablage stehen im README als Ausblick, nicht als Beschluss.
-* **Anrede.** Die Texte sind überwiegend unpersönlich gehalten, die Projektsteuerung siezt,
-  vereinzelt steht „du“. Eine einheitliche Anrede ist nicht festgelegt.
-* **Zielstufe der Barrierefreiheit** (siehe „Accessibility & Inclusion“).
 
 ## Brand Commitments
 
-Als dauerhaft bindend ist die Marke nicht bestätigt (siehe „Offen“). Heutiger Stand:
-
 * **Name:** KaPlan; die Bereiche heißen Planlaufmanagement, Baubetriebsplanung und
   Projektsteuerung.
-* **Absender:** Mailänder Consult – Wortmarke in der Kopfzeile, Hausfarbe als Akzent (`--accent`
-  in `src/shared/global.css`).
-* **Sprache:** deutsch, in den Begriffen des Fachs.
+* **Sprache:** deutsch, in den Begriffen des Fachs (`CLAUDE.md`).
+* **Anrede in der Oberfläche:** „du“, durchgehend und kollegial (bestätigt am 12.11.2026). Der
+  Bestand ist noch nicht angeglichen: Wo er direkt anspricht, siezt er in allen drei Bereichen;
+  „du“ steht bisher an einer Stelle.
+* **Anrede in E-Mails:** Die mitgelieferten E-Mail-Vorlagen gehen an die Zuständigen eines
+  Schritts – auch an externe Beteiligte – und siezen. Für sie ist nichts anderes festgelegt.
+* **Bildmarken und Hausfarbe:** KaPlan-Logos, die Wortmarke von Mailänder Consult in der Kopfzeile
+  und deren Hausfarbe als Akzent (`--accent` in `src/shared/global.css`) sind heutiger Stand,
+  aber nicht als dauerhaft bindend bestätigt (siehe „Offen“).
 
 ## Evidence on Hand
 
@@ -171,7 +174,7 @@ Als dauerhaft bindend ist die Marke nicht bestätigt (siehe „Offen“). Heutig
 Aus den Antworten vom 12.11.2026 abgeleitet:
 
 1. **Fälliges zuerst.** Was überfällig oder fällig ist und wer am Zug ist, steht vor allem
-   anderen.
+   anderen – als Vorrang bestätigt.
 2. **Jeder Stand ist belegbar.** Was erledigt, freigegeben oder geändert wurde, bleibt mit Datum
    nachvollziehbar und lässt sich weitergeben.
 3. **Ein Vorgehen für alle Projekte.** Gleiche Workflows, Vorlagen und Begriffe; Abweichungen im
@@ -189,4 +192,5 @@ Aus den Antworten vom 12.11.2026 abgeleitet:
   muss weiter funktionieren (`CLAUDE.md`).
 * **Schmale Bildschirme:** bedienbar bis etwa 400 px Breite (`CLAUDE.md`).
 * **Sprache:** deutsch; Datumsangaben in der Form TT.MM.JJJJ.
-* **Offen:** Eine Zielstufe, etwa nach WCAG, ist nicht festgelegt.
+* **Zielstufe:** WCAG 2.2, Stufe AA – als Ziel für neue und überarbeitete Teile (bestätigt am
+  12.11.2026). Eine Prüfung des Bestands gegen diese Stufe liegt nicht vor.
