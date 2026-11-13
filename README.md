@@ -771,6 +771,11 @@ von GitHub nach `~/.impeccable/` und prüft es gegen
 `.claude/skills/impeccable/scripts/engine-checksums.txt`. Wo dieses Programm nicht starten darf,
 liest die Skill `PRODUCT.md` direkt und arbeitet ohne es weiter.
 
+`.claude/settings.json` erlaubt den Starter ohne Rückfrage – in zwei Schreibweisen, weil die Skill
+ihn mit relativem und mit vollem Pfad aufruft. Der volle Pfad enthält den Ordnernamen des
+Repositorys und ist nach einer Umbenennung anzupassen. Die flüchtigen Dateien, die Impeccable unter
+`.impeccable/` ablegt, hält `.gitignore` aus dem Repository, ebenso `node_modules/` und `dist/`.
+
 ## Nächste Schritte (Ausblick)
 
 * Ablösung von `storage.ts` durch eine Datenbank (z.B. PostgreSQL) samt API – das Datenmodell in
