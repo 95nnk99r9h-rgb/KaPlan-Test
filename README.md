@@ -752,6 +752,14 @@ zurückhaltende Flächen auf `#f5f5f7`, weiße Karten mit weichen Radien und fei
 Hausfarbe von Mailänder Consult `#24456e` als Akzent (auch für alle Fortschrittsbalken),
 transluzente Seitenleiste und Kopfzeile, Segmented Controls und Pill-Buttons. Die Oberfläche ist bis auf Telefonbreite (~400 px) nutzbar.
 
+Schrift, Kennzeichen und Platzhalter erreichen auf allen hellen Flächen ein Kontrastverhältnis von
+mindestens 4,5 : 1, in beiden Farbmodi. Die Statusfarben gibt es dafür in Stufen
+(`src/shared/global.css`): die Grundfarbe für Zeichen und Flächen, `--orange-flaeche` für Punkt,
+Stern und Randmarke, die `-text`-Tokens für die Schrift auf getönten Kennzeichen. Der Tastaturfokus
+zeigt überall denselben Rahmen in der Hausfarbe. Schaltflächen und Schaltzeichen reagieren auf
+mindestens 24 px. Suchfelder tragen den Namen „Suchen“; `Field` (`src/shared/ui.tsx`) verknüpft
+Beschriftung und Hinweis mit dem Eingabefeld.
+
 Für wen KaPlan gedacht ist, was es leisten soll und welche Festlegungen dabei dauerhaft gelten,
 hält [`PRODUCT.md`](PRODUCT.md) fest – als Grundlage für Gestaltungsarbeit. Die Überschriften
 dort sind englisch, weil sie dem Schema der Gestaltungshilfe Impeccable folgen.
