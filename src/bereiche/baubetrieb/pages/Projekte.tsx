@@ -287,6 +287,7 @@ export function ProjektDialog({
           <span className="row" style={{ gap: 6 }}>
             <TextInput
               type="date"
+              aria-label="Erster Anmeldetermin (ca.)"
               value={form.ersterAnmeldetermin}
               onChange={(v) => set('ersterAnmeldetermin', v)}
             />

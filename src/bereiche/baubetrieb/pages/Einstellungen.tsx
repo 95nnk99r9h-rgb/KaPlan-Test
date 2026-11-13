@@ -109,6 +109,7 @@ export function Einstellungen() {
                         </td>
                         <td>
                           <Select
+                            aria-label={`Berechnung ${RIL_KUERZEL[s]}`}
                             value={f.bezug}
                             onChange={(v) => setze({ bezug: v as RilFrist['bezug'] })}
                             options={[

@@ -1,7 +1,14 @@
 /** Wiederverwendbare Oberflächenbausteine im hellen Apple-Stil. */
-import { useEffect } from 'react';
-import type { ChangeEvent, ReactNode } from 'react';
+import { cloneElement, isValidElement, useEffect, useId } from 'react';
+import type { ChangeEvent, ReactElement, ReactNode } from 'react';
 import { Icon } from './icons';
+
+/**
+ * Eingabeelemente, die `Field` mit seiner Beschriftung verknüpft. Zusammengesetzte
+ * Inhalte (eine Zeile aus mehreren Feldern, eigene Bausteine) bleiben unverknüpft –
+ * dort wüsste das `<label>` nicht, auf welches Feld es zeigen soll.
+ */
+const VERKNUEPFBAR: unknown[] = ['input', 'select', 'textarea', TextInput, TextArea, Select];
 
 export function Card({ children, className = '' }: { children: ReactNode; className?: string }) {
   return <div className={`card ${className}`}>{children}</div>;
@@ -75,11 +82,30 @@ export function Field({
   children: ReactNode;
   full?: boolean;
 }) {
+  const id = useId();
+  const hinweisId = hint ? `${id}-hinweis` : undefined;
+  // Ein einzelnes Eingabeelement erhält die Kennung, auf die das <label> zeigt:
+  // Ein Klick auf die Beschriftung setzt den Fokus, und Vorleseprogramme nennen
+  // Beschriftung und Hinweis. Eine schon gesetzte Kennung bleibt bestehen.
+  let feldId: string | undefined;
+  let inhalt = children;
+  if (isValidElement(children) && VERKNUEPFBAR.includes(children.type)) {
+    const kind = children as ReactElement<{ id?: string; 'aria-describedby'?: string }>;
+    feldId = kind.props.id ?? id;
+    inhalt = cloneElement(kind, {
+      id: feldId,
+      'aria-describedby': kind.props['aria-describedby'] ?? hinweisId,
+    });
+  }
   return (
     <div className={`field ${full ? 'full' : ''}`}>
-      <label>{label}</label>
-      {children}
-      {hint ? <span className="hint">{hint}</span> : null}
+      <label htmlFor={feldId}>{label}</label>
+      {inhalt}
+      {hint ? (
+        <span className="hint" id={hinweisId}>
+          {hint}
+        </span>
+      ) : null}
     </div>
   );
 }
@@ -131,14 +157,29 @@ export function Select({
   onChange,
   options,
   placeholder,
+  id,
+  'aria-describedby': beschriebenVon,
+  'aria-label': name,
 }: {
   value: string;
   onChange: (v: string) => void;
   options: { value: string; label: string }[];
   placeholder?: string;
+  /** Kennung und Beschreibung – setzt `Field`, um Beschriftung und Hinweis zu verknüpfen. */
+  id?: string;
+  'aria-describedby'?: string;
+  /** Name für Auswahlfelder ohne sichtbare Beschriftung, etwa in einer Tabellenzeile. */
+  'aria-label'?: string;
 }) {
   return (
-    <select className="select" value={value} onChange={(e) => onChange(e.target.value)}>
+    <select
+      className="select"
+      id={id}
+      aria-describedby={beschriebenVon}
+      aria-label={name}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+    >
       {placeholder !== undefined ? <option value="">{placeholder}</option> : null}
       {options.map((o) => (
         <option key={o.value} value={o.value}>
@@ -188,7 +229,13 @@ export function Search({
       <span style={{ display: 'flex', color: 'var(--text-tertiary)' }}>
         <Icon name="suche" size={14} />
       </span>
-      <input value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} />
+      {/* Der Platzhalter nennt nur, wonach sich suchen lässt; den Namen des Felds trägt aria-label. */}
+      <input
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        aria-label="Suchen"
+      />
       {value ? (
         <button type="button" className="btn-icon" onClick={() => onChange('')} aria-label="Suche leeren">
           ✕

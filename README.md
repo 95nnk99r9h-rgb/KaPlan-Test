@@ -752,6 +752,38 @@ zurückhaltende Flächen auf `#f5f5f7`, weiße Karten mit weichen Radien und fei
 Hausfarbe von Mailänder Consult `#24456e` als Akzent (auch für alle Fortschrittsbalken),
 transluzente Seitenleiste und Kopfzeile, Segmented Controls und Pill-Buttons. Die Oberfläche ist bis auf Telefonbreite (~400 px) nutzbar.
 
+Schrift, Kennzeichen und Platzhalter erreichen auf allen hellen Flächen ein Kontrastverhältnis von
+mindestens 4,5 : 1, in beiden Farbmodi. Die Statusfarben gibt es dafür in Stufen
+(`src/shared/global.css`): die Grundfarbe für Zeichen und Flächen, `--orange-flaeche` für Punkt,
+Stern und Randmarke, die `-text`-Tokens für die Schrift auf getönten Kennzeichen. Der Tastaturfokus
+zeigt überall denselben Rahmen in der Hausfarbe. Schaltflächen und Schaltzeichen reagieren auf
+mindestens 24 px. Suchfelder tragen den Namen „Suchen“; `Field` (`src/shared/ui.tsx`) verknüpft
+Beschriftung und Hinweis mit dem Eingabefeld.
+
+Für wen KaPlan gedacht ist, was es leisten soll und welche Festlegungen dabei dauerhaft gelten,
+hält [`PRODUCT.md`](PRODUCT.md) fest – als Grundlage für Gestaltungsarbeit. Die Überschriften
+dort sind englisch, weil sie dem Schema der Gestaltungshilfe Impeccable folgen.
+
+Impeccable (Version 4.8.2, Apache-2.0) liegt als Projekt-Skill unter `.claude/skills/impeccable/`
+und stellt in Claude Code den Befehl `/impeccable` bereit, etwa `/impeccable critique …` oder
+`/impeccable audit …`. Der Ordner ist unverändert aus dem öffentlichen Repository
+`pbakaus/impeccable` übernommen (Tag `skill-v4.8.2`), dazu `LICENSE` und `NOTICE.md` von dort. Er
+ist fremder Code in englischer Sprache: Er wird nicht von Hand bearbeitet, sondern nur als Ganzes
+ersetzt, und die Regeln dieses Repositories zu Sprache und Kommentaren gelten für ihn nicht. Der
+Design-Hook und die Subagenten, die der Impeccable-Installer zusätzlich einrichtet, sind nicht
+enthalten.
+
+Für Kontextabruf, automatische Prüfregeln und den Live-Modus startet die Skill ein eigenes
+Programm. Der Starter `.claude/skills/impeccable/scripts/impeccable` lädt es beim ersten Aufruf
+von GitHub nach `~/.impeccable/` und prüft es gegen
+`.claude/skills/impeccable/scripts/engine-checksums.txt`. Wo dieses Programm nicht starten darf,
+liest die Skill `PRODUCT.md` direkt und arbeitet ohne es weiter.
+
+`.claude/settings.json` erlaubt den Starter ohne Rückfrage – in zwei Schreibweisen, weil die Skill
+ihn mit relativem und mit vollem Pfad aufruft. Der volle Pfad enthält den Ordnernamen des
+Repositorys und ist nach einer Umbenennung anzupassen. Die flüchtigen Dateien, die Impeccable unter
+`.impeccable/` ablegt, hält `.gitignore` aus dem Repository, ebenso `node_modules/` und `dist/`.
+
 ## Nächste Schritte (Ausblick)
 
 * Ablösung von `storage.ts` durch eine Datenbank (z.B. PostgreSQL) samt API – das Datenmodell in

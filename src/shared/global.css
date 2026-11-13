@@ -13,9 +13,12 @@
   --bg-hover: rgba(0, 0, 0, 0.035);
   --bg-active: rgba(36, 69, 110, 0.1);
 
+  /* Graustufen der Schrift: beide erreichen auf allen hellen Flächen der
+     Anwendung mindestens 4,5 : 1 – auch auf getönten Flächen wie dem
+     Segmentschalter und der Gruppenzeile. */
   --text: #1d1d1f;
-  --text-secondary: #6e6e73;
-  --text-tertiary: #8e8e93;
+  --text-secondary: #5a5a5f;
+  --text-tertiary: #6b6b70;
   --fill-gruppe: #f2f2f7;
 
   --separator: rgba(0, 0, 0, 0.08);
@@ -26,21 +29,34 @@
   --accent-hover: #2d5687;
   --accent-soft: rgba(36, 69, 110, 0.12);
 
-  --green: #34c759;
+  /*
+   * Statusfarben. Die Grundfarbe trägt Zeichen und Flächen (Punkt, Marker),
+   * Rot und Orange stehen im Code auch direkt als Schriftfarbe – sie erreichen
+   * deshalb auf hellen Flächen 4,5 : 1, Rot auch unter weißer Schrift. Grün
+   * erreicht 3 : 1 und trägt nur Zeichen und große Kennzahlen.
+   * „-soft“ ist die getönte Fläche hinter einem Kennzeichen, „-text“ die
+   * Schrift darauf (mindestens 4,5 : 1, auch in Gruppenzeilen).
+   */
+  --green: #28a046;
   --green-soft: rgba(52, 199, 89, 0.14);
-  --orange: #ff9500;
+  --orange: #a35c00;
+  /* Orange für Punkt, Stern und Randmarke – als Schriftfarbe zu hell */
+  --orange-flaeche: #d17a00;
   --orange-soft: rgba(255, 149, 0, 0.16);
-  --red: #ff3b30;
+  --orange-text: #8a4f00;
+  --red: #cf2a1f;
   --red-soft: rgba(255, 59, 48, 0.12);
+  --rot-text: #b3261e;
   --purple: #5856d6;
   --purple-soft: rgba(88, 86, 214, 0.12);
+  --violett-text: #4b49c9;
   --gray-soft: rgba(120, 120, 128, 0.12);
   /* Angekündigt – gelb hinterlegt */
   --gelb-soft: rgba(255, 204, 0, 0.16);
   --gelb-soft-stark: rgba(255, 204, 0, 0.3);
   --gelb-text: #8a6100;
-  /* Abgeschlossen – grüne Bezeichnung */
-  --gruen-text: #1f7a37;
+  /* Abgeschlossen – grüne Bezeichnung; auch die Schrift grüner Kennzeichen */
+  --gruen-text: #196a2f;
 
   --radius-sm: 6px;
   --radius: 10px;
@@ -82,6 +98,22 @@ a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 ::selection { background: var(--accent-soft); }
+
+/* Platzhalter in Eingabefeldern bleiben lesbar (mindestens 4,5 : 1). */
+::placeholder { color: var(--text-tertiary); opacity: 1; }
+
+/*
+ * Tastaturfokus: überall derselbe Rahmen in der Hausfarbe. Eingabefelder
+ * zeigen stattdessen Rand und Hof (.input:focus), das Suchfeld seinen Rahmen
+ * um das ganze Feld (.search:focus-within).
+ */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Wo ein Behälter den Rahmen außen abschnitte, liegt er innen. */
+.tabs button:focus-visible,
+.tab-plus:focus-visible,
+.segmented button:focus-visible,
+.kennzahlen .card-click:focus-visible,
+.filter-menu button:focus-visible { outline-offset: -2px; }
 
 /* ------------------------------------------------------------------ */
 /* Layout                                                              */
@@ -296,15 +328,31 @@ a:hover { text-decoration: underline; }
 .btn-outline:hover { background: var(--bg-hover); }
 
 .btn-danger { background: transparent; color: var(--red); }
-.btn-danger:hover { background: var(--red-soft); }
+.btn-danger:hover { background: var(--red-soft); color: var(--rot-text); }
 
-.btn-sm { padding: 3px 10px; font-size: 12px; }
+/* Auch die kleine Schaltfläche bleibt 24 px hoch – das Mindestmaß für Maus und Finger. */
+.btn-sm { padding: 3px 10px; font-size: 12px; min-height: 24px; }
 /* Text, der wie eine Verknüpfung wirkt (z.B. Zeilentitel in Tabellen). */
 .link-btn {
   border: none; background: none; padding: 0;
   font: inherit; color: inherit; text-align: left; cursor: pointer;
 }
 .link-btn:hover { color: var(--accent); }
+
+/*
+ * Kleine Schaltzeichen und Textverknüpfungen behalten ihre Größe im Satzbild.
+ * Die Fläche, die auf Klick und Fingertipp reagiert, reicht darüber hinaus,
+ * damit sie mindestens 24 px misst.
+ */
+.link-btn, .sort-btn, .filter-btn, .chev-btn, .gruppe-btn, .step-aufklappen, .chip-weg { position: relative; }
+.link-btn::after, .sort-btn::after, .filter-btn::after, .chev-btn::after,
+.gruppe-btn::after, .step-aufklappen::after, .chip-weg::after { content: ''; position: absolute; }
+.link-btn::after, .step-aufklappen::after { inset: -3px 0; }
+.sort-btn::after { inset: -4px 0; }
+.filter-btn::after { inset: -3px; }
+.chev-btn::after { inset: -2px; }
+.gruppe-btn::after { inset: -6px; }
+.chip-weg::after { inset: -6px -5px; }
 
 .btn-icon {
   border: none;
@@ -370,7 +418,7 @@ a:hover { text-decoration: underline; }
 .textarea { resize: vertical; min-height: 90px; line-height: 1.5; }
 .textarea.mono { font-family: var(--font-mono); font-size: 12.5px; }
 .select { appearance: none; padding-right: 28px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%236e6e73' d='M5 6 0 0h10z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%235a5a5f' d='M5 6 0 0h10z'/%3E%3C/svg%3E");
   background-repeat: no-repeat; background-position: right 10px center; }
 
 .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
@@ -384,9 +432,13 @@ a:hover { text-decoration: underline; }
   min-width: 180px;
 }
 .search input { border: none; background: none; outline: none; width: 100%; font-size: 13px; }
+/* Das Suchfeld liegt auf getönter Fläche; der Platzhalter ist deshalb eine Stufe dunkler. */
+.search input::placeholder { color: var(--text-secondary); }
 .search span { color: var(--text-tertiary); font-size: 12px; }
+/* Der Fokus zeigt sich am ganzen Suchfeld, nicht am randlosen Eingabefeld darin. */
+.search:focus-within { outline: 2px solid var(--accent); outline-offset: 1px; }
 
-.checkbox { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; cursor: pointer; }
+.checkbox { display: inline-flex; align-items: center; gap: 8px; min-height: 24px; font-size: 13px; cursor: pointer; }
 .checkbox input { width: 15px; height: 15px; accent-color: var(--accent); }
 
 /* ------------------------------------------------------------------ */
@@ -554,6 +606,11 @@ a:hover { text-decoration: underline; }
 
 /* Projektmarkierung */
 .stern {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  min-height: 24px;
   cursor: pointer;
   font-size: 16px;
   line-height: 1;
@@ -561,8 +618,8 @@ a:hover { text-decoration: underline; }
   padding: 2px;
   border-radius: 6px;
 }
-.stern:hover { background: var(--bg-hover); color: var(--orange); }
-.stern.aktiv { color: var(--orange); }
+.stern:hover { background: var(--bg-hover); color: var(--orange-flaeche); }
+.stern.aktiv { color: var(--orange-flaeche); }
 
 /* Angemeldeter Bearbeiter in der Seitenleiste */
 .bearbeiter {
@@ -592,15 +649,15 @@ a:hover { text-decoration: underline; }
   background: var(--gray-soft);
   color: var(--text-secondary);
 }
-.badge.green { background: var(--green-soft); color: #248a3d; }
-.badge.orange { background: var(--orange-soft); color: #b26a00; }
-.badge.red { background: var(--red-soft); color: #c9261c; }
+.badge.green { background: var(--green-soft); color: var(--gruen-text); }
+.badge.orange { background: var(--orange-soft); color: var(--orange-text); }
+.badge.red { background: var(--red-soft); color: var(--rot-text); }
 .badge.blue { background: var(--accent-soft); color: var(--accent); }
-.badge.purple { background: var(--purple-soft); color: var(--purple); }
+.badge.purple { background: var(--purple-soft); color: var(--violett-text); }
 
 .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; background: var(--text-tertiary); }
 .dot.green { background: var(--green); }
-.dot.orange { background: var(--orange); }
+.dot.orange { background: var(--orange-flaeche); }
 .dot.red { background: var(--red); }
 .dot.blue { background: var(--accent); }
 
@@ -679,7 +736,7 @@ a:hover { text-decoration: underline; }
 .gruppe-btn.offen .chev { transform: rotate(90deg); }
 /* Kleiner Pfeil zum Auf- und Zuklappen einzelner Zeilen */
 .chev-btn { display: flex; align-items: center; justify-content: center; width: 20px; height: 20px; flex: 0 0 20px; padding: 0; margin: 0; border: none; border-radius: 6px; background: none; color: var(--text-tertiary); cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; }
-.chev-btn:hover { background: rgba(0, 0, 0, 0.05); color: var(--text-primary); }
+.chev-btn:hover { background: rgba(0, 0, 0, 0.05); color: var(--text); }
 .chev-btn.offen { transform: rotate(90deg); }
 /*
  * Der Pfeil zum Aufklappen liegt links vor Symbol und Titel, damit
@@ -1077,12 +1134,17 @@ a:hover { text-decoration: underline; }
 :root[data-farbmodus='kontrast'] {
   --green: #00786a;
   --green-soft: rgba(0, 120, 106, 0.16);
-  --orange: #a86800;
+  /* Bernstein als Schrift eine Stufe dunkler als für Punkt und Stern (4,5 : 1 auch auf getönten Zeilen) */
+  --orange: #985e00;
+  --orange-flaeche: #a86800;
   --orange-soft: rgba(168, 104, 0, 0.18);
+  --orange-text: #7d4d00;
   --red: #b0007a;
   --red-soft: rgba(176, 0, 122, 0.14);
+  --rot-text: #8a0060;
   --purple: #4b3ea8;
   --purple-soft: rgba(75, 62, 168, 0.16);
+  --violett-text: #3a3087;
 
   --text-secondary: #46464c;
   --text-tertiary: #56565d;
