@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(.claude/skills/impeccable/scripts/impeccable *)",
+      "Bash(/home/user/KaPlan-Test/.claude/skills/impeccable/scripts/impeccable *)"
+    ]
+  }
+}
