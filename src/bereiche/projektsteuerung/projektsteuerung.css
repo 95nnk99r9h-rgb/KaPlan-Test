@@ -60,7 +60,7 @@
 .ps-link::after {
   content: '';
   position: absolute;
-  inset: -3px 0;
+  inset: -4px 0;
 }
 .ps-table {
   table-layout: auto;
